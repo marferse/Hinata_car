@@ -15,3 +15,31 @@ h1{font-size:clamp(1.5rem,3vw,1.9rem);font-weight:800;letter-spacing:-.02em}h2{f
 .brand-icon{width:48px;height:48px;border:0;background:transparent;overflow:visible}.brand-icon img{object-fit:contain}@media(max-width:700px){.brand-icon{width:44px;height:44px;border-radius:0}}
 
 .login{max-width:420px;margin:8vh auto;padding:28px;display:flex;flex-direction:column;gap:18px;background:white;border-radius:24px}.login img{object-fit:contain;align-self:center}.login h1,.login p{text-align:center}.login form,.login label{display:flex;flex-direction:column;gap:12px}.login input{padding:14px;border:1px solid #ddd;border-radius:12px}.login small{color:#666;text-align:center}
+
+/* Catalan refresh: purple distinguishes the selected day and occupied hours. */
+:root{--accent:#7850aa;--accent-soft:#eee6f7;--passat:#7850aa;--mazda:#684294}
+.day-strip button.chosen{background:var(--accent);color:#fff;box-shadow:0 4px 12px #7850aa25}
+.day-strip button.chosen .day-reservations{color:#f0e8fa}
+.day-strip button:hover:not(.chosen){border-color:#bc9fdb;background:#f7f2fc}
+.time-block.passat{background:var(--passat)}.time-block.mazda{background:var(--mazda)}
+.lane-track{background:repeating-linear-gradient(to right,#f6f1fb 0,#f6f1fb calc(25% - 1px),#e5d9f1 calc(25% - 1px),#e5d9f1 25%)}
+.car-thumbnail{width:150px;height:auto;flex-shrink:0;display:block}
+.car-card-main{flex-wrap:wrap;gap:8px 18px;align-items:center;padding-top:10px}
+.car-card-main>div{flex:1;min-width:140px}
+.car-card.passat .car-name,.car-card.mazda .car-name{color:var(--ink)}
+.passat .car-book,.mazda .car-book{background:#faf7fd;color:#603784}
+.car-choice .car-thumbnail{width:68px}.car-choice button{gap:8px}
+.car-choice .active.passat,.car-choice .active.mazda{background:var(--accent-soft);color:#603784;border-color:var(--accent)}
+.tabs button.selected{color:#603784}.tabs button.selected:before{background:var(--accent-soft)}
+@media(max-width:700px){.car-card-main{flex-direction:column;align-items:flex-start;padding:6px 14px 16px;gap:4px;min-height:150px}.car-card-main>div{min-width:0;width:100%}.car-thumbnail{width:100%;max-width:170px;align-self:center}.car-choice .car-thumbnail{width:58px}.car-choice button{padding:12px 8px;flex-wrap:wrap}.car-choice .active.passat,.car-choice .active.mazda{padding:11px 7px}.tabs button.selected{color:#603784}.tabs button.selected:before{background:var(--accent-soft)}}
+.car-card-main>.car-thumbnail{width:150px;height:auto}.section-heading p{text-transform:none}
+@media(max-width:700px){.car-card-main>.car-thumbnail{display:block;width:100%;max-width:170px;height:auto}}
+
+/* Real blue family cars, with matching visual size and wheel baseline. */
+.car-photo{position:relative;overflow:hidden;aspect-ratio:2.2;background:#fff}
+.car-card-main>.car-photo{width:180px;height:auto}
+.car-photo img{position:absolute;display:block;max-width:none;height:auto}
+.car-estate img{width:143%;left:-21.5%;top:-28%}
+.car-compact img{width:115%;left:-7.5%;top:0}
+.car-choice .car-photo{width:86px;flex-shrink:0;border-radius:6px}
+@media(max-width:700px){.car-card-main>.car-photo{width:100%;max-width:180px;height:auto}.car-choice .car-photo{width:72px}}

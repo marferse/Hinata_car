@@ -3,10 +3,10 @@ export type Reservation={id:string;car:string;start:number;end:number;participan
 export function overlaps(a:{start:number;end:number},b:{start:number;end:number}){return a.start<b.end&&a.end>b.start;}
 export function violations(r:Pick<Reservation,'car'|'start'|'end'|'participants'>,existing:Reservation[],members:Member[],now=Date.now()):string[]{
  const errors:string[]=[];
- if(r.start<now)errors.push('El inicio está en el pasado.');
- if(r.start>now+168*3600000)errors.push('El inicio supera las 168 horas de antelación.');
- if(r.end-r.start>10*3600000)errors.push('La reserva supera las 10 horas.');
- for(const other of existing){if(!overlaps(r,other))continue;if(r.car===other.car)errors.push(`${r.car} ya está reservado en parte de ese horario.`);for(const id of r.participants.filter(id=>other.participants.includes(id)))errors.push(`${members.find(m=>m.id===id)?.name??'Una persona'} ya participa en otra reserva en ese horario.`);}
+ if(r.start<now)errors.push('L’inici és al passat.');
+ if(r.start>now+168*3600000)errors.push('L’inici supera les 168 hores d’antelació.');
+ if(r.end-r.start>10*3600000)errors.push('La reserva supera les 10 hores.');
+ for(const other of existing){if(!overlaps(r,other))continue;if(r.car===other.car)errors.push(`${r.car} ja està reservat en una part d’aquest horari.`);for(const id of r.participants.filter(id=>other.participants.includes(id)))errors.push(`${members.find(m=>m.id===id)?.name??'Una persona'} ja participa en una altra reserva en aquest horari.`);}
  return [...new Set(errors)];
 }
 export type ReservationInput={car:string;start:number;end:number;participants:string[];note:string;id?:string;version?:number;override?:boolean};

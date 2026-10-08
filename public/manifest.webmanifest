@@ -1,1 +1,1 @@
-{"id": "/", "name": "Hinata Garaje", "short_name": "Hinata Garaje", "start_url": "/", "scope": "/", "display": "standalone", "background_color": "#f8f8f8", "theme_color": "#141414", "icons": [{"src": "/hinata-driver-bn.png", "sizes": "1254x1254", "type": "image/png", "purpose": "any"}]}
+{"id": "/", "name": "Hinata Garatge", "short_name": "Hinata Garatge", "start_url": "/", "scope": "/", "display": "standalone", "background_color": "#f8f8f8", "theme_color": "#141414", "icons": [{"src": "/hinata-driver-bn.png", "sizes": "1254x1254", "type": "image/png", "purpose": "any"}]}
