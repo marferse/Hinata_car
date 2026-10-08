@@ -1,0 +1,6 @@
+import {initializeApp,getApps} from 'firebase/app';
+import {getAuth} from 'firebase/auth';
+export const configured=!!(process.env.NEXT_PUBLIC_FIREBASE_API_KEY&&process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN&&process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID&&process.env.NEXT_PUBLIC_FIREBASE_APP_ID);
+export function auth(){if(!configured)throw new Error('Firebase todavía no está configurado.');return getAuth(getApps()[0]??initializeApp({apiKey:process.env.NEXT_PUBLIC_FIREBASE_API_KEY,authDomain:process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,projectId:process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,appId:process.env.NEXT_PUBLIC_FIREBASE_APP_ID}));}
+export async function authenticatedFetch(path:string,options:RequestInit={}){const user=auth().currentUser;if(!user)throw new Error('Inicia sesión para continuar.');const headers=new Headers(options.headers);headers.set('Authorization','Bearer '+await user.getIdToken());return fetch(path,{...options,headers,cache:'no-store'});}
+export async function download(path:string,filename:string){const r=await authenticatedFetch(path);if(!r.ok){const d=await r.json();throw new Error(d.error||'No se pudo descargar.');}const url=URL.createObjectURL(await r.blob());const a=document.createElement('a');a.href=url;a.download=filename;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}

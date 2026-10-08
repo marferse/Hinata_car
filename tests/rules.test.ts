@@ -1,0 +1,14 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {violations,validShape,overlaps} from '../lib/rules.ts';
+const now=Date.UTC(2026,9,8),hour=3600000,members=['m1','m2','m3','m4'].map(id=>({id,name:id,email:null,admin:id==='m1'?1:0}));
+const base={id:'r1',car:'Passat',start:now+hour,end:now+2*hour,participants:['m1','m2'],creator:'m1',note:'',override:0,version:1,updated:now};
+test('adjacent bookings are allowed',()=>assert.equal(overlaps(base,{start:base.end,end:base.end+hour}),false));
+test('same car overlaps are rejected',()=>assert.ok(violations({...base,participants:['m3']},[base],members,now).some(s=>s.includes('Passat'))));
+test('passengers cannot reserve the other car',()=>assert.ok(violations({...base,car:'Mazda',participants:['m2']},[base],members,now).some(s=>s.includes('m2'))));
+test('different cars and people are allowed',()=>assert.deepEqual(violations({...base,car:'Mazda',participants:['m3']},[base],members,now),[]));
+test('168h limit applies to start, end can exceed it',()=>assert.deepEqual(violations({...base,start:now+168*hour,end:now+169*hour},[],members,now),[]));
+test('over 168h is rejected',()=>assert.ok(violations({...base,start:now+168*hour+1,end:now+169*hour},[],members,now).length));
+test('10 hours maximum',()=>{assert.deepEqual(violations({...base,end:base.start+10*hour},[],members,now),[]);assert.ok(violations({...base,end:base.start+10*hour+1},[],members,now).length);});
+test('crossing midnight is allowed',()=>assert.deepEqual(violations({...base,start:now+23*hour,end:now+25*hour},[],members,now),[]));
+test('malformed participants and dates rejected',()=>{assert.equal(validShape(base),true);for(const patch of [{participants:[]},{participants:['m1','m1']},{participants:['unknown']},{end:base.start},{car:'Otro'},{start:NaN}])assert.equal(validShape({...base,...patch}),false);});

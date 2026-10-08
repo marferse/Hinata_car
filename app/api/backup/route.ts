@@ -1,0 +1,2 @@
+import {state,AppError,respond} from '../../../lib/store';
+export async function GET(req:Request){try{const s=await state(req);if(!s.me.admin)throw new AppError(403,'Solo el administrador puede exportar la copia.');return new Response(JSON.stringify({format:'garaje-familia-v1',exported:new Date().toISOString(),...s},null,2),{headers:{'Content-Type':'application/json','Content-Disposition':'attachment; filename="garaje-copia.json"','Cache-Control':'no-store'}});}catch(e){return respond(async()=>{throw e;});}}
