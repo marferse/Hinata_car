@@ -43,3 +43,19 @@ h1{font-size:clamp(1.5rem,3vw,1.9rem);font-weight:800;letter-spacing:-.02em}h2{f
 .car-compact img{width:115%;left:-7.5%;top:0}
 .car-choice .car-photo{width:86px;flex-shrink:0;border-radius:6px}
 @media(max-width:700px){.car-card-main>.car-photo{width:100%;max-width:180px;height:auto}.car-choice .car-photo{width:72px}}
+
+/* A stable purple identity for each family member (m1–m4).
+   Booking bars and stripes identify the creator; chips identify participants. */
+.member-m1{--member-color:#d8c8ef;--member-ink:#39264f}
+.member-m2{--member-color:#b598d4;--member-ink:#30203f}
+.member-m3{--member-color:#8b65b5;--member-ink:#fff}
+.member-m4{--member-color:#5e3d83;--member-ink:#fff}
+.member-neutral{--member-color:#eeeeee;--member-ink:#333}
+.avatar[class*="member-"],.profile-avatar[class*="member-"],.time-block[class*="member-"]{background:var(--member-color);color:var(--member-ink)}
+.reservation .member-stripe{background:var(--member-color)}
+.reservation-people{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px}
+.member-chip{display:inline-flex;align-items:center;border-radius:6px;background:var(--member-color);color:var(--member-ink);font-size:.8125rem;font-weight:500;padding:2px 7px;overflow-wrap:anywhere;max-width:100%}
+.member-legend{display:flex;flex-wrap:wrap;gap:10px 18px;margin-bottom:16px}
+.member-legend-item{display:inline-flex;align-items:center;gap:6px;font-size:.8125rem;overflow-wrap:anywhere;min-width:0;max-width:100%}
+.member-dot{width:11px;height:11px;border-radius:50%;background:var(--member-color);flex-shrink:0}
+@media(max-width:700px){.people-choice .avatar{display:grid;flex-shrink:0;width:24px;height:24px;font-size:.75rem}.people-choice label{flex-wrap:wrap}.people-choice label>span:last-child{flex:1;min-width:65px}}
